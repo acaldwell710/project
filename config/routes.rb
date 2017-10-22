@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :wikis
+  resources :users, only: [:new, :create]
 
   get 'about' => 'welcome#about'
 
