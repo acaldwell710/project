@@ -1,4 +1,7 @@
 class WikisController < ApplicationController
+
+  before_action :require_sign_in, except: :show
+
   def index
     @wikis = Wiki.all
   end
@@ -16,6 +19,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
+    @wiki.user = current_user
+
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki
@@ -31,8 +36,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
+    @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
@@ -53,5 +57,11 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an error deleting the wiki."
       render :show
     end
+  end
+
+  private
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body)
   end
 end
