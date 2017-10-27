@@ -27,14 +27,14 @@ RSpec.describe WikisController, type: :controller do
     describe "POST create" do
       it "returns http redirect" do
         post :create, params: {wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(wikis_path)
       end
     end
 
     describe "GET edit" do
       it "returns http redirect" do
         get :edit, params: {id: my_wiki.id}
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(edit_wiki_path)
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe WikisController, type: :controller do
         new_body = RandomData.random_paragraph
 
         put :update, params: {id: my_wiki.id, wiki: {title: new_title, body: new_body}}
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(wikis_path)
       end
     end
 
