@@ -1,11 +1,12 @@
 class WikisController < ApplicationController
-
-  before_action :require_sign_in, except: :show
-
-  before_action :authorize_user, except: :show
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_wiki, only: [:show, :edit, :update, :destroy]
+  
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki).all
   end
 
   def show
@@ -13,15 +14,14 @@ class WikisController < ApplicationController
   end
 
   def new
-    @wiki = Wiki.new
+    @wiki = current_user.wikis.new
+    authorize @wiki
   end
 
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-
-    @wiki.user = current_user
+    @wiki = current_user.wikis.create(wiki_params)
+    #@wiki.user = current_user
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was saved."
@@ -40,7 +40,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
 
-    if @wiki.save
+    if @wiki.update(wiki_params)
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
     else
@@ -62,6 +62,10 @@ class WikisController < ApplicationController
   end
 
   private
+  def set_wiki
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
+  end
 
   def wiki_params
     params.require(:wiki).permit(:title, :body)

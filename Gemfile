@@ -68,7 +68,7 @@ gem 'bcrypt'
 
 #Used for authorization
 gem 'pundit'
-
+#Used for authentication
 gem 'devise', '~> 4.3'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
