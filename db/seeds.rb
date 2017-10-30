@@ -25,15 +25,24 @@ users = User.all
     user:   users.sample,
     title:  RandomData.random_sentence,
     body:   RandomData.random_paragraph
-    )
+  )
  end
  wikis = Wiki.all
 
-user = User.first
-user.update_attributes!(
-  email: 'acaldwell710@gmail.com', # replace this with your personal email
-  password: 'helloworld'
-)
+  # Create an admin user
+  admin = User.create!(
+    name:     'Admin User',
+    email:    'admin@example.com',
+    password: 'helloworld',
+    role:     'admin'
+  )
+
+  # Create a standard
+  standard = User.create!(
+    name:     'Standard User',
+    email:    'standard@example.com',
+    password: 'helloworld'
+  )
 
 
 
