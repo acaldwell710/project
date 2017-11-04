@@ -71,5 +71,10 @@ gem 'pundit'
 #Used for authentication
 gem 'devise', '~> 4.3'
 
+#Used for payments
+gem 'stripe'
+
+gem 'figaro', '1.0'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 #gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
