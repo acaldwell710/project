@@ -8,6 +8,7 @@ RSpec.describe Wiki, type: :model do
   let(:user) { User.create!(name: "Blocipedia User", email: "user@blocipedia.com", password: "helloworld") }
 
   it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:collaborators)}
 
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:body) }
