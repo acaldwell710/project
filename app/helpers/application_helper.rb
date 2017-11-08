@@ -5,7 +5,7 @@ module ApplicationHelper
     content_tag :div, capture(&block), class: css_class
   end
 
-  def markdown(text)
-    Redcarpet.new(text, :hard_wrap, :filter_html, :autolink).to_html.html_safe
-  end
+  #def markdown(renderer)
+  #  markdown = Redcarpet::Markdown.new(renderer)#.to_html.html_safe
+  #end
 end

@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <p><%= markdown(@wiki.body).to_html %></p>
+    <p><%= Redcarpet::Render::SmartyPants.render(@wiki.body) %></p>
   </div>
   <% if user_is_authorized_for_wiki? %>
   <div class="col-md-4">
