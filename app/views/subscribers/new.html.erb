@@ -1,10 +1,80 @@
+<!--
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 panel panel-default form-style">
       <div class="panel-body">
-        <h2>Final Signup Step</h2>
-        <h4>This gives you full access to the website.</h4>
         <%= render 'form' %>
     </div>
   </div>
 </div>
+-->
+<!--
+<div class="container">
+<%= form_tag subscribers_path, id: 'stripeForm' do -%>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"></script>
+  <article>
+    <%= label_tag 'amount', 'Monthly Subscription', class: 'amount' %>
+    <%= label_tag 'amount', "$5.99", class: "amount-figure" %>
+  </article> <br>
+  <button id="stripe-button">&nbsp;
+  <%= label_tag 'title', 'Subscribe' %>
+  <%= hidden_field_tag 'stripeToken' %>
+  <%= hidden_field_tag 'stripeEmail' %>
+  <%= hidden_field_tag 'stripeAmount' %>
+  </button>
+  <br><br>
+
+
+  <script>
+    var handler = StripeCheckout.configure({
+      key: "<%= Stripe.api_key %>",
+      token: function (token, args) {
+        $("#stripeToken").value = token.id;
+        $("#stripeAmount").value = <%= @amount %>;
+        $("#stripeForm").submit();
+      }
+    });
+
+    $('#stripe-button').on('click', function (e) {
+      // Open Checkout with further options
+        name: 'Your customer name',
+        description: 'Monthly Subscription',
+        amount: "$5.99"
+      });
+    e.preventDefault();
+    });
+
+    $(window).on('popstate', function() {
+      handler.close();
+    });
+  </script>
+</div>
+<% end %>
+-->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<!--
+<%= form_tag subscribers_path do %>
+  <article>
+  <% if flash[:error].present? %>
+    <div id="error_explanation">
+      <p><%= flash[:error] %></p>
+    </div>
+  <% end %>
+  <label class="amount">
+    <span>Amount: $5.99</span>
+  </label>
+  </article>
+-->
+  <form action="/subscribers/new" method="GET">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_4WMQ6XpRHAjVqxOHS1GXopcZ"
+      data-amount="599"
+      data-name="ambercaldwell.net"
+      data-description="Widget"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto">
+    </script>
+  </form>
+<% end %>

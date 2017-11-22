@@ -72,7 +72,7 @@ gem 'pundit'
 gem 'devise', '~> 4.3'
 
 #Used for payments
-gem 'stripe'
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 
 gem 'figaro', '1.0'
 

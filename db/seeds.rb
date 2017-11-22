@@ -28,6 +28,13 @@ users = User.all
   )
  end
  wikis = Wiki.all
+  #Create a premium user
+  premium = User.create!(
+    name:     'Premium User',
+    email:    'premium@example.com',
+    password: 'hellowworld',
+    role:     'premium'
+  )
 
   # Create an admin user
   admin = User.create!(
@@ -41,7 +48,8 @@ users = User.all
   standard = User.create!(
     name:     'Standard User',
     email:    'standard@example.com',
-    password: 'helloworld'
+    password: 'helloworld',
+    role:     'premium'
   )
 
 

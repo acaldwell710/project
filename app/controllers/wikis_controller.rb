@@ -1,5 +1,6 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  #before_action :authorize_user, except: [:show, :new, :create]
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
 
   after_action :verify_authorized, except: :index
@@ -73,9 +74,9 @@ class WikisController < ApplicationController
 
   #def authorize_user
   #  wiki = Wiki.find(params[:id])
-  #  unless current_user == current_user.standard? || current_user.admin?
+  #  unless current_user == @wiki.user || current_user.admin?
   #    flash[:alert] = "You must be an admin or a standard member to do that."
   #    redirect_to wiki
   #  end
-  #end
+#  end
 end

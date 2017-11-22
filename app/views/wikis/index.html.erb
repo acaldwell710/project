@@ -1,12 +1,4 @@
 <h1><%= link_to "All Wikis", wikis_path %></h1>
 
-<% @wikis.each do |wiki| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to wiki.title, wiki %>
-      </h4>
-    </div>
-  </div>
-<% end %>
+<p><%= link_to "list of wikis", wikis_path %></p>
 <%= link_to "Create A Wiki", new_wiki_path %>
