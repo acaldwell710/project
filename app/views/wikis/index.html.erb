@@ -1,4 +1,7 @@
 <h1><%= link_to "All Wikis", wikis_path %></h1>
 
-<p><%= link_to "list of wikis", wikis_path %></p>
-<%= link_to "Create A Wiki", new_wiki_path %>
+<%= link_to "Create A Wiki", new_wiki_path %><br><br>
+
+<%= @wikis.each do |wiki| %>
+  <%= link_to "#{wiki.title}", wiki %><br>
+  <% end %>
