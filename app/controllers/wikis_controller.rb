@@ -4,10 +4,10 @@ class WikisController < ApplicationController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
 
   after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
+  #after_action :verify_policy_scoped, only: :index
 
   def index
-    @wikis = policy_scope(Wiki)
+    #@wikis = policy_scope(Wiki)
   end
 
   def show
@@ -79,4 +79,10 @@ class WikisController < ApplicationController
   #    redirect_to wiki
   #  end
 #  end
+
+## app/wikis/index.html.erb
+#<%= @wikis.each do |wiki| %>
+#  <%= link_to "#{wiki.title}", wiki %><br>
+#  <% end %>
+
 end
